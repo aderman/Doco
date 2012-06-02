@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docum.Web", "Docum.Web\Docum.Web.csproj", "{A9B7BCCA-09BC-4B7F-8203-4A17A704C233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docum.Lib", "Docum.Lib\Docum.Lib.csproj", "{5DB06C5B-EDAE-45CB-BF3D-4042EAE70180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docum.Lib.Tests", "Docum.Lib.Tests\Docum.Lib.Tests.csproj", "{1B656F18-C94F-4C61-9BAA-536DF59BC41D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9B7BCCA-09BC-4B7F-8203-4A17A704C233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B7BCCA-09BC-4B7F-8203-4A17A704C233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B7BCCA-09BC-4B7F-8203-4A17A704C233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B7BCCA-09BC-4B7F-8203-4A17A704C233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB06C5B-EDAE-45CB-BF3D-4042EAE70180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB06C5B-EDAE-45CB-BF3D-4042EAE70180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB06C5B-EDAE-45CB-BF3D-4042EAE70180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB06C5B-EDAE-45CB-BF3D-4042EAE70180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B656F18-C94F-4C61-9BAA-536DF59BC41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B656F18-C94F-4C61-9BAA-536DF59BC41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B656F18-C94F-4C61-9BAA-536DF59BC41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B656F18-C94F-4C61-9BAA-536DF59BC41D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
