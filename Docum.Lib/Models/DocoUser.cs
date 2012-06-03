@@ -20,7 +20,7 @@
     /// </summary>
     public class DocoUser : AbstractValidator<DocoUser>
     {
-        #region Ctor
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocoUser"/> class. 
@@ -33,28 +33,7 @@
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets UserId. This is Primary Key as Hash.
-        /// </summary>
-        [BsonId]
-        public ObjectId UserId { get; private set; }
-
-        /// <summary>
-        /// Gets or sets UserName.  The user's username. This cannot be empty.
-        /// </summary>
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// Gets or sets Name. The user's name.  This cannot be empty.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets Surname. The user's surname.  This cannot be empty.
-        /// </summary>
-        public string Surname { get; set; }
+        #region Public Properties
 
         /// <summary>
         /// Gets or sets Email. The user's email address. This must have a valid email address. 
@@ -67,13 +46,34 @@
         public bool IsDeleted { get; set; }
 
         /// <summary>
+        /// Gets or sets Name. The user's name.  This cannot be empty.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets Surname. The user's surname.  This cannot be empty.
+        /// </summary>
+        public string Surname { get; set; }
+
+        /// <summary>
         /// Gets or sets UserFolder. This is user's root folder.
         /// </summary>
         public DocoFolder UserFolder { get; set; }
 
+        /// <summary>
+        /// Gets UserId. This is Primary Key as Hash.
+        /// </summary>
+        [BsonId]
+        public ObjectId UserId { get; private set; }
+
+        /// <summary>
+        /// Gets or sets UserName.  The user's username. This cannot be empty.
+        /// </summary>
+        public string UserName { get; set; }
+
         #endregion
 
-        #region Validation
+        #region Public Methods and Operators
 
         /// <summary>
         /// The validations of user object.
@@ -83,10 +83,10 @@
         /// </returns>
         public ValidationResult Validation()
         {
-            RuleFor(x => x.UserName).NotEmpty();
-            RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Surname).NotEmpty();
-            RuleFor(x => x.Email).EmailAddress();
+            this.RuleFor(x => x.UserName).NotEmpty();
+            this.RuleFor(x => x.Name).NotEmpty();
+            this.RuleFor(x => x.Surname).NotEmpty();
+            this.RuleFor(x => x.Email).EmailAddress();
             return this.Validate(this);
         }
 
@@ -102,7 +102,7 @@
     /// </summary>
     public class DocoDocument : HistoricalObject<DocoDocument>
     {
-        #region Ctor
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocoDocument"/> class.
@@ -131,7 +131,17 @@
 
         #endregion
 
-        #region Properties
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets DType. This is document type. Such as 'Word' etc.
+        /// </summary>
+        public DocType DType { get; set; }
+
+        /// <summary>
+        /// Gets or sets DocContent. This is document content.
+        /// </summary>
+        public string DocContent { get; set; }
 
         /// <summary>
         /// Gets DocId. This is Primary Key as Hash.
@@ -140,34 +150,9 @@
         public ObjectId DocId { get; private set; }
 
         /// <summary>
-        /// Gets or sets Name. This is document name or title. This cannot be empty.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets DocContent. This is document content.
-        /// </summary>
-        public string DocContent { get; set; }
-
-        /// <summary>
-        /// Gets or sets DType. This is document type. Such as 'Word' etc.
-        /// </summary>
-        public DocType DType { get; set; }
-
-        /// <summary>
         /// Gets or sets DocVersion. This is document version.
         /// </summary>
         public Version DocVersion { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether IsPublic.
-        /// </summary>
-        public bool IsPublic { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether IsCurrent.
-        /// </summary>
-        public bool IsCurrent { get; set; }
 
         /// <summary>
         /// Gets or sets EnabledUsers. List of users who have access to documents.
@@ -175,13 +160,28 @@
         public List<DocoAccess> EnabledUsers { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether IsCurrent.
+        /// </summary>
+        public bool IsCurrent { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether IsPublic.
+        /// </summary>
+        public bool IsPublic { get; set; }
+
+        /// <summary>
         /// Gets or sets Keywords. The keywords are used during search in documents.
         /// </summary>
         public List<string> Keywords { get; set; }
 
+        /// <summary>
+        /// Gets or sets Name. This is document name or title. This cannot be empty.
+        /// </summary>
+        public string Name { get; set; }
+
         #endregion
 
-        #region Validation
+        #region Public Methods and Operators
 
         /// <summary>
         /// The validations of document object.
@@ -191,7 +191,7 @@
         /// </returns>
         public ValidationResult Validation()
         {
-            RuleFor(x => x.Name).NotEmpty();
+            this.RuleFor(x => x.Name).NotEmpty();
             return this.Validate(this);
         }
 
@@ -207,7 +207,7 @@
     /// </summary>
     public class DocoFolder : HistoricalObject<DocoFolder>
     {
-        #region Ctor
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocoFolder"/> class.
@@ -221,7 +221,7 @@
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// Gets FolderId. This is Primary Key as Hash.
@@ -235,9 +235,9 @@
         public string FolderName { get; set; }
 
         /// <summary>
-        /// Gets or sets OwnerId. This is Id of folder's owner. 
+        /// Gets or sets Folders. List of user's folders.
         /// </summary>
-        public string OwnerId { get; set; }
+        public List<DocoFolder> Folders { get; set; }
 
         /// <summary>
         /// Gets or sets ListOfDocuments. List of user's documents in folder.
@@ -245,13 +245,13 @@
         public List<DocoDocument> ListOfDocuments { get; set; }
 
         /// <summary>
-        /// Gets or sets Folders. List of user's folders.
+        /// Gets or sets OwnerId. This is Id of folder's owner. 
         /// </summary>
-        public List<DocoFolder> Folders { get; set; }
+        public string OwnerId { get; set; }
 
         #endregion
 
-        #region Validation
+        #region Public Methods and Operators
 
         /// <summary>
         /// The validations of folder object.
@@ -261,7 +261,7 @@
         /// </returns>
         public ValidationResult Validation()
         {
-            RuleFor(x => x.FolderName).NotEmpty();
+            this.RuleFor(x => x.FolderName).NotEmpty();
             return this.Validate(this);
         }
 
@@ -281,7 +281,7 @@
     public class HistoricalObject<T> : AbstractValidator<T>
         where T : class
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// Gets or sets CreatedAt.
@@ -289,14 +289,14 @@
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
-        /// Gets or sets SavedAt.
-        /// </summary>
-        public DateTime? SavedAt { get; set; }
-
-        /// <summary>
         /// Gets or sets LastSavedBy.
         /// </summary>
         public string LastSavedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets SavedAt.
+        /// </summary>
+        public DateTime? SavedAt { get; set; }
 
         #endregion
     }
@@ -320,12 +320,12 @@
             /// <summary>
             /// Read Access
             /// </summary>
-            Read = 0,
+            Read = 0, 
 
             /// <summary>
             /// Write Access
             /// </summary>
-            Write = 1,
+            Write = 1, 
 
             /// <summary>
             /// Read and Write Access
@@ -335,7 +335,12 @@
 
         #endregion
 
-        #region Properties
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets AType. The access type of user name who will access document.
+        /// </summary>
+        public AccessType AType { get; set; }
 
         /// <summary>
         /// Gets or sets UserId. The user's id who will access document.
@@ -346,11 +351,6 @@
         /// Gets or sets UserName. The user's name who will access document.
         /// </summary>
         public string UserName { get; set; }
-
-        /// <summary>
-        /// Gets or sets AType. The access type of user name who will access document.
-        /// </summary>
-        public AccessType AType { get; set; }
 
         #endregion
     }
@@ -364,20 +364,20 @@
     /// </summary>
     public class Version
     {
-        #region Ctor
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Version"/> class.
         /// </summary>
         public Version()
         {
-            Major = 0;
-            Minor = 0;
+            this.Major = 0;
+            this.Minor = 0;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// Gets Major. 
@@ -391,7 +391,7 @@
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// This is used to increase version.
@@ -419,7 +419,7 @@
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}.{1}", Major, Minor);
+            return string.Format("{0}.{1}", this.Major, this.Minor);
         }
 
         #endregion
@@ -444,17 +444,17 @@
             /// <summary>
             /// Add a new folder
             /// </summary>
-            AddNewFolder = 0,
+            AddNewFolder = 0, 
 
             /// <summary>
             /// Add a new document
             /// </summary>
-            AddNewDocument = 1,
+            AddNewDocument = 1, 
 
             /// <summary>
             /// Update folder name
             /// </summary>
-            UpdateFolderName = 2,
+            UpdateFolderName = 2, 
 
             /// <summary>
             /// Update document name
@@ -464,7 +464,17 @@
 
         #endregion
 
-        #region Properties
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets AType. The type of performed activity.
+        /// </summary>
+        public ActivityType AType { get; set; }
+
+        /// <summary>
+        /// Gets or sets LogContent. The content of performed activity.
+        /// </summary>
+        public string LogContent { get; set; }
 
         /// <summary>
         /// Gets LogId.
@@ -473,14 +483,9 @@
         public ObjectId LogId { get; private set; }
 
         /// <summary>
-        /// Gets or sets AType. The type of performed activity.
+        /// Gets or sets LogTime. The date of performed activity.
         /// </summary>
-        public ActivityType AType { get; set; }
-
-        /// <summary>
-        /// Gets or sets UserName. The user's name who performed the activity.
-        /// </summary>
-        public string UserName { get; set; }
+        public DateTime LogTime { get; set; }
 
         /// <summary>
         /// Gets or sets UserId. The user's name whow performed the activity.
@@ -488,14 +493,9 @@
         public string UserId { get; set; }
 
         /// <summary>
-        /// Gets or sets LogContent. The content of performed activity.
+        /// Gets or sets UserName. The user's name who performed the activity.
         /// </summary>
-        public string LogContent { get; set; }
-
-        /// <summary>
-        /// Gets or sets LogTime. The date of performed activity.
-        /// </summary>
-        public DateTime LogTime { get; set; }
+        public string UserName { get; set; }
 
         #endregion
     }
