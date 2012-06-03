@@ -53,19 +53,6 @@ namespace Docum.Lib.Services
         }
     }
 
-
-    public class GenericValidator
-    {
-        public static ValidationResult Validate<T>(T t) where T : class
-        {
-            var t2 = t.GetType();
-            var vldtrName = String.Format("Docum.Lib.Services.{0}Validator,Docum.Lib", t2.Name);
-            var vldr = (AbstractValidator<T>) Activator.CreateInstance(Type.GetType(vldtrName));
-            return vldr.Validate(t);
-        }
-
-    }
-
     public class ActivityLogHelper
     {
         private static Dictionary<ActivityLog.ActivityType, string> _messages;
@@ -96,13 +83,4 @@ namespace Docum.Lib.Services
         }
 
     }
-
-    public static class ObjectExtension
-    {
-        public static ValidationResult ValidateObject<T>(this T o) where T:class 
-        {
-            return GenericValidator.Validate(o);
-        }
-    }
-
 }
