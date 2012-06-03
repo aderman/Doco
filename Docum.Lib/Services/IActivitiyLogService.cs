@@ -25,7 +25,7 @@ namespace Docum.Lib.Services
 
         public void AddNewLogRecord(ActivityLog log)
         {
-            ValidationResult = log.ValidateObject();
+            ValidationResult = log.Validation();
             if ( ValidationResult.IsValid)
                 _mongoDb.Insert(log);
         }
@@ -40,14 +40,6 @@ namespace Docum.Lib.Services
                               UserName = "Empty"
                           };
             AddNewLogRecord(log);
-        }
-    }
-
-    public class ActivityLogValidator : AbstractValidator<ActivityLog>
-    {
-        public ActivityLogValidator()
-        {
-            RuleFor(x => x.UserName).NotEmpty();
         }
     }
 }

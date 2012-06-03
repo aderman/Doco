@@ -27,7 +27,7 @@ namespace Docum.Lib.Services
 
         public void UpdateDocument(DocoUser user, DocoDocument document)
         {
-            var validatorResult = document.ValidateObject();
+            var validatorResult = document.Validation();
             if (validatorResult.IsValid)
             {
                 Traverse<DocoDocument>(user.UserFolder,document.DocId.ToString(),(x,y)=>x.DocId.ToString() == y,x=>
@@ -35,7 +35,7 @@ namespace Docum.Lib.Services
                         x.DocContent=document.DocContent;
                         x.LastSavedBy=user.UserName;
                         x.SavedAt=DateTime.Now;
-                        x.DocVersion = new Version(x.DocVersion, true);
+                        x.DocVersion = x.DocVersion.IncreaseVersion();
                     }
                 );
                 _userService.Update(user);
@@ -49,14 +49,6 @@ namespace Docum.Lib.Services
                             UserId = user.UserId.ToString()
                         });
             }
-        }
-    }
-
-    public class DocoDocumentValidator : AbstractValidator<DocoDocument>
-    {
-        public DocoDocumentValidator()
-        {
-            RuleFor(x => x.Name).NotEmpty();
         }
     }
 }

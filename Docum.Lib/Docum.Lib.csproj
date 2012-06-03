@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DocoUser.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="MongoDb\BsonExists.cs" />
     <Compile Include="MongoDb\Helper.cs" />
     <Compile Include="MongoDb\MongoRepository.cs" />
