@@ -432,7 +432,7 @@
     /// <summary>
     /// This contains the activities of all process. Used to store log.
     /// </summary>
-    public class ActivityLog
+    public class ActivityLog : AbstractValidator<ActivityLog>
     {
         #region Enums
 
@@ -496,6 +496,22 @@
         /// Gets or sets UserName. The user's name who performed the activity.
         /// </summary>
         public string UserName { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The validations of activity object.
+        /// </summary>
+        /// <returns>
+        /// If activity object is validated, it returns true.
+        /// </returns>
+        public ValidationResult Validation()
+        {
+            RuleFor(x => x.UserName).NotEmpty();
+            return this.Validate(this);
+        }
 
         #endregion
     }
