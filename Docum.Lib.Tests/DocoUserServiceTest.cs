@@ -46,7 +46,6 @@ namespace Docum.Lib.Tests
             usrSrv.Delete(user);
             var user2 = usrSrv.SelectById(user.UserId.ToString());
             Assert.IsTrue(user2.IsDeleted);
-
         }
     }
 }
