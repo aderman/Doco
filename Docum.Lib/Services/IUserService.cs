@@ -29,7 +29,7 @@ namespace Docum.Lib.Services
         public DocoUser Insert(DocoUser user)
         {
 
-            ValidationResult = user.ValidateObject();
+            ValidationResult = user.Validation();
             if ( !ValidationResult.IsValid)
             {
                 return null;
@@ -41,7 +41,7 @@ namespace Docum.Lib.Services
 
         public bool Update(DocoUser user)
         {
-            ValidationResult = user.ValidateObject();
+            ValidationResult = user.Validation();
             if (!ValidationResult.IsValid)
             {
                 return false;
@@ -65,15 +65,6 @@ namespace Docum.Lib.Services
         public void Drop()
         {
             _docoDb.Drop();
-        }
-    }
-
-    public class DocoUserValidator : AbstractValidator<DocoUser>
-    {
-        public DocoUserValidator()
-        {
-            RuleFor(x => x.UserName).NotEmpty();
-            RuleFor(x => x.Email).EmailAddress();
         }
     }
 }
