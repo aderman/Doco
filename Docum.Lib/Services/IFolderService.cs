@@ -29,8 +29,7 @@ namespace Docum.Lib.Services
                                  CreatedAt = DateTime.Now,
                                  SavedAt = DateTime.Now,
                                  FolderName = folderName,
-                                 OwnerId = user.UserId.ToString(),
-                                 FolderId = ObjectId.GenerateNewId()
+                                 OwnerId = user.UserId.ToString()
                              };
             if (parent == null)
                 parent = user.UserFolder;
@@ -70,9 +69,8 @@ namespace Docum.Lib.Services
         {
             var document = new DocoDocument
                                {
-                                   DocId = ObjectId.GenerateNewId(),
                                    CreatedAt = DateTime.Now,
-                                   DocVersion = new Models.Version {Major = 0, Minor = 0},
+                                   DocVersion = new Models.Version(),
                                    DType = DocoDocument.DocType.Word,
                                    IsPublic = false,
                                    IsCurrent = true,
@@ -88,12 +86,5 @@ namespace Docum.Lib.Services
             _activitiyLog.Message(ActivityLog.ActivityType.AddNewDocument,"New Document");
             return document;
         }
-    }
-}
-
-namespace Docum.Lib
-{
-    public class DocoUsers
-    {
     }
 }
