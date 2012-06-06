@@ -8,69 +8,91 @@
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
 
-    //Todo : Unit Test
+    // Todo : Unit Test
 
+    /// <summary>
+    /// The Repository interface contains common methods for all model classes.
+    /// </summary>
+    /// <typeparam name="T">
+    /// T is model classes.
+    /// </typeparam>
     public interface IMongoRepository<T> : IDisposable where T : class
     {
-        ObjectId Insert(T item, bool existsControl = false);
-
+        /// <summary>
+        /// This method adds a new record to database.
+        /// </summary>
+        /// <param name="item">
+        /// The item.
+        /// </param>
+        /// <returns>
+        /// If it have a unique record in database, it returns null. Or else it returns added item.
+        /// </returns>
+        T Insert(T item);
         T Save(T item, bool existsControl = false);
-
         T GetItemById(ObjectId id);
-
         void Drop();
-
         MongoCursor<T> GetAll();
-
         MongoCursor<T> GetItemsByQuery(QueryComplete queryComplete);
     }
 
+    /// <summary>
+    /// The Repository Class contains common methods for all model classes.
+    /// </summary>
+    /// <typeparam name="T">
+    /// T is model classes.
+    /// </typeparam>
     public class MongoRepository<T> : IMongoRepository<T> where T : class
     {
+        /// <summary>
+        /// The server object
+        /// </summary>
         private readonly MongoServer _server;
 
+        /// <summary>
+        /// The db object.
+        /// </summary>
         private readonly MongoDatabase _mongoDatabase;
 
+        /// <summary>
+        /// The collection object
+        /// </summary>
         private readonly MongoCollection<T> _mongoCollection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MongoRepository{T}"/> class.
+        /// </summary>
         public MongoRepository()
         {
-            var con = new MongoConnectionStringBuilder(Helper.GetConString(Helper.DataBaseName, ""));
+            var con = new MongoConnectionStringBuilder(Helper.GetConString(Helper.DataBaseName, string.Empty));
             _server = MongoServer.Create(con);
             _mongoDatabase = _server.GetDatabase(con.DatabaseName);
             _mongoCollection = _mongoDatabase.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
         }
 
+        /// <summary>
+        /// Dispose method
+        /// </summary>
         public void Dispose()
         {
-            
-        //    throw new System.NotImplementedException();
         }
 
-        public ObjectId Insert(T item, bool existsControl = false)
-        { 
-
-            //Todo : Cache Object Infos 
-            var prop = item.GetType().GetProperties().Single(x => x.PropertyType == typeof(ObjectId));
-            if (existsControl)
+        public T Insert(T item)
+        {
+            // Todo : Cache Object Infos 
+            if (this.ExistsControl(item))
             {
-                if (this.ExistsControl(item))
-                {
-                    return ObjectId.Empty;
-                }
+                return null;
             }
 
             _mongoCollection.Insert(item);
-            return (ObjectId)prop.GetValue(item, null);
+            return item;
         }
 
         private bool ExistsControl(T item)
         {
             var queryList = new List<IMongoQuery>();
             var props = item.GetType().GetProperties();
-// ReSharper disable LoopCanBeConvertedToQuery
             foreach (var propertyInfo in props)
-// ReSharper restore LoopCanBeConvertedToQuery
             {
                 var flag = Attribute.GetCustomAttribute(propertyInfo, typeof(BsonExists));
                 if (flag != null)
@@ -139,6 +161,6 @@
             return _mongoCollection.FindAllAs<T>();
         }
 
-        
+
     }
 }
