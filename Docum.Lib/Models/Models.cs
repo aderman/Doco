@@ -155,7 +155,7 @@
         public Version DocVersion { get; set; }
 
         /// <summary>
-        /// Gets or sets EnabledUsers. List of users who have access to documents.
+        /// Gets or sets EnabledUsers. List of users that have access to documents.
         /// </summary>
         public List<DocoAccess> EnabledUsers { get; set; }
 
@@ -257,7 +257,7 @@
         /// The validations of folder object.
         /// </summary>
         /// <returns>
-        /// If folder object is validated, it returns true.
+        /// If folder object is validated, it will return true.
         /// </returns>
         public ValidationResult Validation()
         {
@@ -313,7 +313,7 @@
         #region Enums
 
         /// <summary>
-        /// This is access type of users to documents. e.g. read, Write etc.
+        /// This is access type of users to access documents. e.g. Read, Write etc.
         /// </summary>
         public enum AccessType
         {
@@ -338,17 +338,17 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets AType. The access type of user name who will access document.
+        /// Gets or sets AType. The access type of user who will access document.
         /// </summary>
         public AccessType AType { get; set; }
 
         /// <summary>
-        /// Gets or sets UserId. The user's id who will access document.
+        /// Gets or sets UserId. The name of the user who will access document.
         /// </summary>
         public string UserId { get; set; }
 
         /// <summary>
-        /// Gets or sets UserName. The user's name who will access document.
+        /// Gets or sets UserName. The name of the user who will access document.
         /// </summary>
         public string UserName { get; set; }
 
@@ -360,7 +360,7 @@
     #region Version
 
     /// <summary>
-    /// This class contains informations about the document version.
+    /// This class contains information about the document version.
     /// </summary>
     public class Version
     {
@@ -412,7 +412,7 @@
         }
 
         /// <summary>
-        /// This is used to covert string to version
+        /// This is used to convert version to string.
         /// </summary>
         /// <returns>
         /// Returns Version. Major.Minor.
@@ -430,14 +430,14 @@
     #region ActivityLog
 
     /// <summary>
-    /// This contains the activities of all process. Used to store log.
+    /// This contains the activities of all process to store log.
     /// </summary>
     public class ActivityLog : AbstractValidator<ActivityLog>
     {
         #region Enums
 
         /// <summary>
-        /// This specifies the type of performed activity​​.
+        /// This specifies the types of performed activity.
         /// </summary>
         public enum ActivityType
         {
@@ -488,12 +488,12 @@
         public DateTime LogTime { get; set; }
 
         /// <summary>
-        /// Gets or sets UserId. The user's name whow performed the activity.
+        /// Gets or sets UserId. The name of the user who performed the activity.
         /// </summary>
         public string UserId { get; set; }
 
         /// <summary>
-        /// Gets or sets UserName. The user's name who performed the activity.
+        /// Gets or sets UserName. The name of the user who performed the activity.
         /// </summary>
         public string UserName { get; set; }
 
@@ -505,7 +505,7 @@
         /// The validations of activity object.
         /// </summary>
         /// <returns>
-        /// If activity object is validated, it returns true.
+        /// If activity object is validated, it will return true.
         /// </returns>
         public ValidationResult Validation()
         {
