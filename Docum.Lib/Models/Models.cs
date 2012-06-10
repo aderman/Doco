@@ -5,6 +5,8 @@
     using System;
     using System.Collections.Generic;
 
+    using Docum.Lib.MongoDb;
+
     using FluentValidation;
     using FluentValidation.Results;
 
@@ -38,6 +40,7 @@
         /// <summary>
         /// Gets or sets Email. The user's email address. This must have a valid email address. 
         /// </summary>
+        [BsonUnique]
         public string Email { get; set; }
 
         /// <summary>
@@ -48,6 +51,7 @@
         /// <summary>
         /// Gets or sets Name. The user's name.  This cannot be empty.
         /// </summary>
+        [BsonUnique(false, "surname")] 
         public string Name { get; set; }
 
         /// <summary>
@@ -69,6 +73,7 @@
         /// <summary>
         /// Gets or sets UserName.  The user's username. This cannot be empty.
         /// </summary>
+        [BsonUnique]
         public string UserName { get; set; }
 
         #endregion

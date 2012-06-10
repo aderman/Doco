@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Models.cs" />
-    <Compile Include="MongoDb\BsonExists.cs" />
+    <Compile Include="MongoDb\BsonUnique.cs" />
     <Compile Include="MongoDb\Helper.cs" />
     <Compile Include="MongoDb\MongoRepository.cs" />
     <Compile Include="Services\IActivitiyLogService.cs" />

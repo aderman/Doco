@@ -18,7 +18,7 @@ namespace Docum.Lib.Tests
             _docoUserService = new DocoUserService(new MongoRepository<DocoUser>());
             _folderService = new FolderService(_docoUserService, new ActivitiyLogService(new MongoRepository<ActivityLog>()));
             _docoUserService.Drop();
-            _user = DocoUserServiceTest.CreateUser("sakyazici");
+            _user = TestModel.CreateDocoUser("sakyazici");
             _docoUserService.Insert(_user);
         }
 

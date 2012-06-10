@@ -35,8 +35,7 @@ namespace Docum.Lib.Services
                 return null;
             }
 
-            _docoDb.Insert(user);
-            return user;
+            return _docoDb.Insert(user);
         }
 
         public bool Update(DocoUser user)
