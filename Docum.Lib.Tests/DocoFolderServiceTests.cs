@@ -30,7 +30,7 @@ namespace Docum.Lib.Tests
 
             _folderService.AddNewFolder(_user, "testFolder");
             var folder = _user.UserFolder.Folders[0];
-            _folderService.UpdateName(_user, folder.FolderId.ToString(), folder.FolderName + "update");
+            _folderService.UpdateFolderName(_user, folder.FolderId.ToString(), folder.FolderName + "update");
         }
 
         [Test]

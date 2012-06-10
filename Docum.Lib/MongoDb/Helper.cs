@@ -4,7 +4,7 @@
 
     public static class Helper
     {
-        public static string DataBaseName
+        public static string DatabaseName
         {
             get
             {

@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Docum.Lib.Models;
-using Docum.Lib.MongoDb;
-using FluentValidation;
-using Version = Docum.Lib.Models.Version;
 
 namespace Docum.Lib.Services
 {
     public interface IDocumentService : IMongoService
     {
-        
+        void UpdateDocument(DocoUser user, DocoDocument document);
     }
 
     public class DocumentService : MongoService, IDocumentService
     {
-        private IActivitiyLogService _activitiyLogService;
-        private IUserService _userService;
+        private readonly IActivitiyLogService _activitiyLogService;
+        private readonly IUserService _userService;
 
         public DocumentService(IUserService userService, IActivitiyLogService activitiyLogService)
         {

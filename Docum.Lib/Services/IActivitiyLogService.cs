@@ -16,9 +16,9 @@ namespace Docum.Lib.Services
 
     public class ActivitiyLogService : MongoService, IActivitiyLogService
     {
-        private IMongoRepository<ActivityLog> _mongoDb;
+        private readonly IMongoRepository<ActivityLog> _mongoDb;
 
-        public ActivitiyLogService(IMongoRepository<ActivityLog > mongoDb )
+        public ActivitiyLogService(IMongoRepository<ActivityLog> mongoDb )
         {
             _mongoDb = mongoDb;
         }

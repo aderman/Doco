@@ -128,7 +128,7 @@
         /// </summary>
         public MongoRepository()
         {
-            var con = new MongoConnectionStringBuilder(Helper.GetConString(Helper.DataBaseName, string.Empty));
+            var con = new MongoConnectionStringBuilder(Helper.GetConString(Helper.DatabaseName, string.Empty));
             this._server = MongoServer.Create(con);
             this._mongoDatabase = this._server.GetDatabase(con.DatabaseName);
             this._mongoCollection = this._mongoDatabase.GetCollection<T>(typeof(T).Name.ToLowerInvariant());
@@ -255,6 +255,8 @@
         /// </returns>
         internal bool ExistsUniqueItem(T item)
         {
+
+            
             var queryList = new List<IMongoQuery>();
             PropertyInfo[] props = item.GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in props)

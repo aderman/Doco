@@ -8,7 +8,7 @@ namespace Docum.Lib.Services
     {
         DocoFolder AddNewFolder(DocoUser user, string folderName, DocoFolder parent = null);
         DocoDocument AddNewDocument(DocoUser user, string folderId);
-        void UpdateName(DocoUser user, string folderId, string folderName);
+        void UpdateFolderName(DocoUser user, string folderId, string folderName);
     }
 
     public class FolderService : MongoService, IFolderService
@@ -39,26 +39,7 @@ namespace Docum.Lib.Services
             return folder;
         }
 
-        private void UpdateRecursive(DocoFolder folder, string folderId, Action<DocoFolder> action)
-        {
-            if (folder.FolderId.ToString() == folderId)
-            {
-                action(folder);
-
-                return;
-            }
-            foreach (var docoFolder in folder.Folders)
-            {
-                UpdateRecursive(docoFolder, folderId, action);
-                if (docoFolder.Folders.Count == 0)
-                {
-                    return;
-                }
-
-            }
-        }
-
-        public void UpdateName(DocoUser user, string folderId, string folderName)
+        public void UpdateFolderName(DocoUser user, string folderId, string folderName)
         {
             Traverse<DocoFolder>(user.UserFolder, folderId, (x, y) => x.FolderId.ToString() == folderId,(x) => x.FolderName = folderName );
             _userService.Update(user);

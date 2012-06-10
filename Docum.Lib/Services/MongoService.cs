@@ -8,7 +8,7 @@ namespace Docum.Lib.Services
 {
     public interface IMongoService
     {
-       
+        //private readonly IActivitiyLogService _activitiyLogService;  {Buraya tasinabilir.}
         ValidationResult ValidationResult { get; set; }
         void Traverse<T>(DocoFolder folder, string id, Func<T, string, bool> map, Action<T> reduce) where T : class;
     }
