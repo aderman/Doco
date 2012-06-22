@@ -10,47 +10,47 @@ namespace Docum.Lib.Services
     {
         //private readonly IActivitiyLogService _activitiyLogService;  {Buraya tasinabilir.}
         ValidationResult ValidationResult { get; set; }
-        void Traverse<T>(DocoFolder folder, string id, Func<T, string, bool> map, Action<T> reduce) where T : class;
+        // void Traverse<T>(DocoFolder folder, string id, Func<T, string, bool> map, Action<T> reduce) where T : class;
     }
 
     public class MongoService : IMongoService 
     {
         public ValidationResult ValidationResult { get; set; }
 
-        public  void Traverse<T>(DocoFolder folder, string id, Func<T, string, bool> map, Action<T> reduce) where T : class
-        {
-            if (typeof(T) == typeof(DocoFolder))
-            {
-                var obj = folder as T;
-                if (map(obj, id))
-                {
-                    reduce(obj);
-                    return;
-                }
-            }
-            else
-            {
-                foreach (var document in folder.ListOfDocuments)
-                {
-                    var obj = document as T;
-                    if (map(obj, id))
-                    {
-                        reduce(obj);
-                        return;
-                    }
-                }
-            }
+        //public  void Traverse<T>(DocoFolder folder, string id, Func<T, string, bool> map, Action<T> reduce) where T : class
+        //{
+        //    if (typeof(T) == typeof(DocoFolder))
+        //    {
+        //        var obj = folder as T;
+        //        if (map(obj, id))
+        //        {
+        //            reduce(obj);
+        //            return;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (var document in folder.ListOfDocuments)
+        //        {
+        //            var obj = document as T;
+        //            if (map(obj, id))
+        //            {
+        //                reduce(obj);
+        //                return;
+        //            }
+        //        }
+        //    }
 
-            foreach (var f in folder.Folders)
-            {
-                Traverse(f, id, map, reduce);
-                if (f.Folders.Count == 0)
-                {
-                    return;
-                }
-            }
-            return;
-        }
+        //    foreach (var f in folder.Folders)
+        //    {
+        //        Traverse(f, id, map, reduce);
+        //        if (f.Folders.Count == 0)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //    return;
+        //}
     }
 
     public class ActivityLogHelper

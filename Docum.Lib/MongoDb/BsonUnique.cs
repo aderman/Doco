@@ -1,4 +1,6 @@
-﻿namespace Docum.Lib.MongoDb
+﻿using MongoDB.Bson.IO;
+
+namespace Docum.Lib.MongoDb
 {
     using System;
 
@@ -41,4 +43,6 @@
         /// </summary>
         public string[] PropertyNames { get; private set; }
     }
+
+
 }

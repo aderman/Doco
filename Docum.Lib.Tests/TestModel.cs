@@ -75,12 +75,7 @@
                 Name = "Ali Derman",
                 Surname = "TELOGLU",
                 UserName = userName,
-                UserFolder = new DocoFolder()
-                {
-                    CreatedAt = DateTime.Now,
-                    SavedAt = DateTime.Now,
-                }
-            };
+                };
             return user;
         }
     }

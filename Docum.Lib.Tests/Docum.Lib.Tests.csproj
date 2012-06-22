@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocoFolderServiceTests.cs" />
     <Compile Include="DocoUserServiceTest.cs" />
     <Compile Include="DocumentServiceTests.cs" />
     <Compile Include="MongoRepositoryTests.cs" />

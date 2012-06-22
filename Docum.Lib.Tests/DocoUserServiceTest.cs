@@ -14,6 +14,9 @@ namespace Docum.Lib.Tests
         {
             var user = TestModel.CreateDocoUser("ateloglu");
             var usrSrv = new DocoUserService(new MongoRepository<DocoUser>());
+            user.DocumentList.Add(new DocoDocument{Name = "Dokuman111",LastSavedBy = "ateloglu"});
+            user.DocumentList.Add(new DocoDocument{Name = "Dokuman1311",LastSavedBy = "ateloglu"});
+            user.DocumentList.Add(new DocoDocument{Name = "Dokuman12211",LastSavedBy = "ateloglu"});
             usrSrv.Insert(user);
             Assert.IsTrue(usrSrv.ValidationResult.IsValid);
         }

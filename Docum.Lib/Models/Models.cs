@@ -30,7 +30,7 @@
         /// </summary>
         public DocoUser()
         {
-            this.UserFolder = new DocoFolder { FolderName = "Root" };
+            this.DocumentList = new List<DocoDocument>();
         }
 
         #endregion
@@ -60,11 +60,6 @@
         public string Surname { get; set; }
 
         /// <summary>
-        /// Gets or sets UserFolder. This is user's root folder.
-        /// </summary>
-        public DocoFolder UserFolder { get; set; }
-
-        /// <summary>
         /// Gets UserId. This is Primary Key as Hash.
         /// </summary>
         [BsonId]
@@ -75,6 +70,8 @@
         /// </summary>
         [BsonUnique]
         public string UserName { get; set; }
+
+        public List<DocoDocument> DocumentList { get; set; }
 
         #endregion
 
@@ -105,7 +102,8 @@
     /// <summary>
     /// This depends on the user's folders. It stores the user's documents.
     /// </summary>
-    public class DocoDocument : HistoricalObject<DocoDocument>
+    [Serializable]
+    public class DocoDocument : HistoricalObject 
     {
         #region Constructors and Destructors
 
@@ -152,7 +150,10 @@
         /// Gets DocId. This is Primary Key as Hash.
         /// </summary>
         [BsonId]
+        [BsonRepresentation(BsonType.String)]
         public ObjectId DocId { get; private set; }
+
+        public string Id { get { return DocId.ToString(); } }
 
         /// <summary>
         /// Gets or sets DocVersion. This is document version.
@@ -194,10 +195,12 @@
         /// <returns>
         /// If document object is validated, it returns true.
         /// </returns>
+ 
         public ValidationResult Validation()
         {
-            this.RuleFor(x => x.Name).NotEmpty();
-            return this.Validate(this);
+            //this.RuleFor(x => x.Name).NotEmpty();
+            //return this.Validate(this);
+            return null;
         }
 
         #endregion
@@ -205,75 +208,7 @@
 
     #endregion
 
-    #region DocoFolder
-
-    /// <summary>
-    /// This depends on the users. It stores the user's folders.
-    /// </summary>
-    public class DocoFolder : HistoricalObject<DocoFolder>
-    {
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DocoFolder"/> class.
-        /// </summary>
-        public DocoFolder()
-        {
-            this.FolderId = ObjectId.GenerateNewId();
-            this.Folders = new List<DocoFolder>();
-            this.ListOfDocuments = new List<DocoDocument>();
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets FolderId. This is Primary Key as Hash.
-        /// </summary>
-        [BsonId]
-        public ObjectId FolderId { get; private set; }
-
-        /// <summary>
-        /// Gets or sets FolderName.This is folder's name. This cannot be empty.
-        /// </summary>
-        public string FolderName { get; set; }
-
-        /// <summary>
-        /// Gets or sets Folders. List of user's folders.
-        /// </summary>
-        public List<DocoFolder> Folders { get; set; }
-
-        /// <summary>
-        /// Gets or sets ListOfDocuments. List of user's documents in folder.
-        /// </summary>
-        public List<DocoDocument> ListOfDocuments { get; set; }
-
-        /// <summary>
-        /// Gets or sets OwnerId. This is Id of folder's owner. 
-        /// </summary>
-        public string OwnerId { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The validations of folder object.
-        /// </summary>
-        /// <returns>
-        /// If folder object is validated, it will return true.
-        /// </returns>
-        public ValidationResult Validation()
-        {
-            this.RuleFor(x => x.FolderName).NotEmpty();
-            return this.Validate(this);
-        }
-
-        #endregion
-    }
-
-    #endregion
+    
 
     #region HistoricalClass
 
@@ -283,8 +218,8 @@
     /// <typeparam name="T">
     /// The Model Class
     /// </typeparam>
-    public class HistoricalObject<T> : AbstractValidator<T>
-        where T : class
+    public class HistoricalObject //: AbstractValidator<T>
+       //  where T : class
     {
         #region Public Properties
 

@@ -1,0 +1,30 @@
+﻿
+@model  Docum.Lib.Models.DocoDocument
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+	</script>
+
+
+
+<div class="demo">
+<h3>@Model.Name;</h3>
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Preview</a></li>
+		<li><a href="#tabs-2">Properities</a></li>
+		<li><a href="#tabs-3">Revisions</a></li>
+	</ul>
+	<div id="tabs-1" style="height: 200px;">
+		@Model.Name;
+	</div>
+	<div id="tabs-2" style="height: 200px;">
+		Tab 2
+	</div>
+	<div id="tabs-3" style="height: 200px;">
+		Tab 3
+	</div>
+</div>
+
+</div><!-- End demo -->
