@@ -71,9 +71,9 @@
         {
             var user = new DocoUser
             {
-                Email = "teloglu@gmail.com",
-                Name = "Ali Derman",
-                Surname = "TELOGLU",
+                Email = "ttt@gmail.com",
+                Name = "Ali ",
+                Surname = "TTTT",
                 UserName = userName,
                 };
             return user;
@@ -119,4 +119,5 @@
 
         public DateTime DateTimeValue { get; set; }
     }
-}
+},
+                    StringValue2 = 
